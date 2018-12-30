@@ -1,3 +1,5 @@
+const { Scenario } = require('../models/scenarios');
+
 const express = require('express');
 const router = express.Router();
 

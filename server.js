@@ -6,17 +6,20 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+const { router: monstersRouter } = require('./routes/monsters');
 const { router: scenariosRouter } = require('./routes/scenarios');
 
 const app = express();
 
 app.use(express.json());
 app.use(morgan('common'));
+
+app.use('/monsters', monstersRouter);
 app.use('/scenarios', scenariosRouter);
 
 app.get('/', (req, res) => {
-    res.json({ id: 1234, msg: 'Hello, World!' })
-})
+    res.send('Hello, World!');
+});
 
 let server;
 
@@ -26,7 +29,7 @@ function runServer(databaseUrl, port = PORT) {
             if (err) {
                 return reject(err);
             }
-
+            console.log('Connected to database');
             server = app.listen(port, () => {
                 console.log(`Listening on port ${port}`);
                 resolve();

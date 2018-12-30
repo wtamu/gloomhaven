@@ -4,6 +4,6 @@ const attackModifierDeckSchema = mongoose.Schema({
     type: String
 });
 
-const AttackModifierDeck = mongoose.Model('AttackModifierDeck', attackModifierDeckSchema);
+const AttackModifierDeck = mongoose.model('AttackModifierDeck', attackModifierDeckSchema);
 
 module.exports = { AttackModifierDeck };
