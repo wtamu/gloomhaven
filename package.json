@@ -1,0 +1,24 @@
+{
+  "name": "gloomhaven-api",
+  "version": "1.0.0",
+  "description": "Gloomhaven API",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha --exit",
+    "start": "node server.js",
+    "build": "nodemon server.js"
+  },
+  "author": "Will Tamura",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.0",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9"
+  }
+}
