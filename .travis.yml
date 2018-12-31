@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: UEz5+ME9+9kZq/4RBan30QXY1hRGOEdbNOqC0Uzq0jmt+3wxNx986MLE8jSLmQU08oVh52PewbbBoSjS0Guo3Zrh9LcMK6y6VbhskRPGXKg0lwj3i9kUSAB0zFnnr+cTbwoKOJkdB3+VgstzJbpQ2RnHU/5MgtIiEqtk++376E9HqxnM7zUTW971bKjV4B8nZNjPb2zg8yhk5vVW1RwIMKXfQLAKC00Tukv7D0Gk+XbUUhP7itX3CEQv2kfA2PGfdixVnh6cawM5tLJkEBTXHBNB9NvpX7XCl6ZBpvgOAEX5OaWk34GfhwYQgCGGgpjJMqRvSkUzS9tId3il9IbJ9719eT/XhNfhR0FvqFlHQP/CraKjs0mMucc7NYKmJTlxz0jDXK0llpUj9h57nU6scVjQO+xfK4e8LpSF0geV5E0BIF/RZ9jHjjZaKOaABVX9RWBSINuZYfidg+diLacSYFPd6+8zElYOBRXXecS93qJQpZ18XXJsFoXqR8bV9zpifrQzzIzQXni0WZAOMs5TQ482uKpmfdLlmT9HGWbHg3qfk4+vtHC5fG1dLP6doNoblyg2WWikf3f/2fLLO9SCJ89RzPYUa8YBf6U3+iCAw/dh6CK+gbaltDJrG/vySRl6BMOdXgBI88q7QfFyNaploykZ+Djkwjgmssg0iOZgSYM=
+  app: intense-ravine-21437
+  on:
+    repo: wtamu/gloomhaven
