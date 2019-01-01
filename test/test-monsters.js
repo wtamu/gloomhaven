@@ -8,6 +8,7 @@ const expect = chai.expect;
 const { app, runServer, closeServer } = require('../server');
 const { TEST_DATABASE_URL } = require('../config');
 const { Monster } = require('../models/monsters');
+const { Boss } = require('../models/bosses');
 
 chai.use(chaiHttp);
 

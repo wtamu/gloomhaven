@@ -2,23 +2,17 @@ const mongoose = require('mongoose');
 
 const difficultyLevelSchema = mongoose.Schema({
     level: Number,
-    normal: {
-        health: Number,
-        move: Number,
-        attack: Number,
-        range: Number,
-        abilities: [String],
-    },
-    elite: {
-        health: Number,
-        move: Number,
-        attack: Number,
-        range: Number,
-        abilities: [String],
-    }
+    health: Number,
+    move: Number,
+    attack: Number,
+    range: Number,
+    abilities: [String],
+    immunities: [String],
+    special1: String,
+    special2: String,
 });
 
-const monsterSchema = mongoose.Schema({
+const bossSchema = mongoose.Schema({
     name: String,
     deck: [{
         initiative: Number,
@@ -29,7 +23,7 @@ const monsterSchema = mongoose.Schema({
     levels: [difficultyLevelSchema]
 });
 
-monsterSchema.methods.serialize = function (difficultyLevel = 0) {
+bossSchema.methods.serialize = function (difficultyLevel = 0) {
     return {
         id: this._id,
         name: this.name,
@@ -40,9 +34,12 @@ monsterSchema.methods.serialize = function (difficultyLevel = 0) {
         attack:     this.levels[difficultyLevel].attack,
         range:      this.levels[difficultyLevel].range,
         abilities:  this.levels[difficultyLevel].abilities,
+        immunities: this.levels[difficultyLevel].immunities,
+        special1:   this.levels[difficultyLevel].special1,
+        special2:   this.levels[difficultyLevel].special2,
     };
 };
 
-const Monster = mongoose.model("Monster", monsterSchema);
+const Boss = mongoose.model("Boss", bossSchema);
 
-module.exports = { Monster };
+module.exports = { Boss };

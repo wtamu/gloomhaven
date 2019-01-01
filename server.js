@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+const { router: attackModifierDeckRouter } = require('./routes/attackModifierDeck');
 const { router: monstersRouter } = require('./routes/monsters');
 const { router: scenariosRouter } = require('./routes/scenarios');
 
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan('common'));
 
+app.use('/attackModifierDeck', attackModifierDeckRouter);
 app.use('/monsters', monstersRouter);
 app.use('/scenarios', scenariosRouter);
 
@@ -30,6 +32,7 @@ function runServer(databaseUrl, port = PORT) {
                 return reject(err);
             }
             console.log('Connected to database');
+            
             server = app.listen(port, () => {
                 console.log(`Listening on port ${port}`);
                 resolve();

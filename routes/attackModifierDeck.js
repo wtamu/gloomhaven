@@ -1,11 +1,10 @@
-const { Monster } = require('../models/monsters');
-const { Boss } = require('../models/bosses');
+const { AttackModifierDeck } = require('../models/attackModifierDeck');
 
 const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.send('Monsters at /');
+    res.send('AttackModifierDeck at /');
 });
 
 module.exports = { router };
