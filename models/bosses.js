@@ -1,42 +1,44 @@
 const mongoose = require('mongoose');
 
-const difficultyLevelSchema = mongoose.Schema({
-    level: Number,
-    health: Number,
-    move: Number,
-    attack: Number,
-    range: Number,
-    abilities: [String],
-    immunities: [String],
-    special1: String,
-    special2: String,
-});
-
 const bossSchema = mongoose.Schema({
     name: String,
-    deck: [{
+    cards: [{
+        name: String,
         initiative: Number,
-        description: String,
+        text: [String],
         reshuffle: Boolean,
     }],
-    // array index represents difficulty levels (0...7)
-    levels: [difficultyLevelSchema]
+    levels: [{
+        level: Number,
+        health: String,
+        move: Number,
+        attack: Number,
+        range: Number,
+        immunities: [String],
+        special1: [String],
+        special2: [String],
+        notes: String
+    }]
 });
 
-bossSchema.methods.serialize = function (difficultyLevel = 0) {
+/**
+ * Serialize the boss document into client-friendly format
+ * level: Integer level of the boss, defaults 1
+ */
+bossSchema.methods.serialize = function (level = 1) {
     return {
         id: this._id,
         name: this.name,
-        deck: this.deck,
-        level:      this.levels[difficultyLevel].level,
-        health:     this.levels[difficultyLevel].health,
-        movement:   this.levels[difficultyLevel].movement,
-        attack:     this.levels[difficultyLevel].attack,
-        range:      this.levels[difficultyLevel].range,
-        abilities:  this.levels[difficultyLevel].abilities,
-        immunities: this.levels[difficultyLevel].immunities,
-        special1:   this.levels[difficultyLevel].special1,
-        special2:   this.levels[difficultyLevel].special2,
+        cards: this.cards,
+        level:      this.levels[level].level,
+        health:     this.levels[level].health,
+        move:       this.levels[level].move,
+        attack:     this.levels[level].attack,
+        range:      this.levels[level].range,
+        abilities:  this.levels[level].abilities,
+        immunities: this.levels[level].immunities,
+        special1:   this.levels[level].special1,
+        special2:   this.levels[level].special2,
     };
 };
 

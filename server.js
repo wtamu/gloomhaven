@@ -6,9 +6,9 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const { router: attackModifierDeckRouter } = require('./routes/attackModifierDeck');
-const { router: monstersRouter } = require('./routes/monsters');
-const { router: scenariosRouter } = require('./routes/scenarios');
+const { attackModifierDeckRouter } = require('./routes/attackModifierDeck');
+const { monstersRouter } = require('./routes/monsters');
+const { scenariosRouter } = require('./routes/scenarios');
 
 const app = express();
 

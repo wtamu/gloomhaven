@@ -11,28 +11,24 @@ const scenarioSchema = mongoose.Schema({
 
 scenarioSchema.pre('find', function (next) {
     this.populate('monsters');
+    this.populate('bosses');
     next();
 });
 
 scenarioSchema.pre('findOne', function (next) {
     this.populate('monsters');
-    next();
-});
-
-scenarioSchema.pre('find', function (next) {
     this.populate('bosses');
     next();
 });
 
-scenarioSchema.pre('findOne', function (next) {
-    this.populate('bosses');
-    next();
-});
-
-scenarioSchema.methods.serialize = function (difficultyLevel = 0) {
-    // Serialize monster and boss documents
-    const monsters = this.monsters.map(monster => monster.serialize(difficultyLevel));
-    const bosses = this.bosses.map(boss => boss.serialize(difficultyLevel));
+/**
+ * Serialize the scenario document into client-friendly format
+ * level: Integer level of the monsters and bosses, defaults 1
+ */
+scenarioSchema.methods.serialize = function (level = 1) {
+    // Serialize monster and boss subdocuments
+    const monsters = this.monsters.map(monster => monster.serialize(level));
+    const bosses = this.bosses.map(boss => boss.serialize(level));
 
     return {
         id: this._id,
@@ -40,7 +36,7 @@ scenarioSchema.methods.serialize = function (difficultyLevel = 0) {
         number: this.number,
         name: this.name,
         monsters: monsters.concat(bosses)
-    };
+    }
 };
 
 const Scenario = mongoose.model("Scenario", scenarioSchema);

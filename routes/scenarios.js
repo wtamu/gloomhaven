@@ -7,4 +7,4 @@ router.get('/', (req, res) => {
     res.send('Scenarios at /')
 })
 
-module.exports = { router };
+module.exports = { scenariosRouter: router };

@@ -1,46 +1,45 @@
 const mongoose = require('mongoose');
 
-const difficultyLevelSchema = mongoose.Schema({
-    level: Number,
-    normal: {
-        health: Number,
-        move: Number,
-        attack: Number,
-        range: Number,
-        abilities: [String],
-    },
-    elite: {
-        health: Number,
-        move: Number,
-        attack: Number,
-        range: Number,
-        abilities: [String],
-    }
-});
-
 const monsterSchema = mongoose.Schema({
-    name: String,
-    deck: [{
+    name: { type: String, unique: true, required: true },
+    cards: [{
+        name: String,
         initiative: Number,
-        description: String,
+        text: [String],
         reshuffle: Boolean,
     }],
-    // array index represents difficulty levels (0...7)
-    levels: [difficultyLevelSchema]
+    levels: [{
+        level: Number,
+        normal: {
+            health: Number,
+            move: Number,
+            attack: Number,
+            range: Number,
+            abilities: [String],
+        },
+        elite: {
+            health: Number,
+            move: Number,
+            attack: Number,
+            range: Number,
+            abilities: [String],
+        }
+    }]
 });
 
-monsterSchema.methods.serialize = function (difficultyLevel = 0) {
+/**
+ * Serialize the monster document into client-friendly format
+ * level: Integer level of the monster, defaults 1
+ */
+monsterSchema.methods.serialize = function (level = 1) {
     return {
         id: this._id,
         name: this.name,
-        deck: this.deck,
-        level:      this.levels[difficultyLevel].level,
-        health:     this.levels[difficultyLevel].health,
-        movement:   this.levels[difficultyLevel].movement,
-        attack:     this.levels[difficultyLevel].attack,
-        range:      this.levels[difficultyLevel].range,
-        abilities:  this.levels[difficultyLevel].abilities,
-    };
+        cards: this.cards,
+        level: this.levels[level].level,
+        normal: this.levels[level].normal,
+        elite: this.levels[level].elite,
+    }
 };
 
 const Monster = mongoose.model("Monster", monsterSchema);

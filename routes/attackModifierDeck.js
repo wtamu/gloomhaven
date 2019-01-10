@@ -7,4 +7,4 @@ router.get('/', (req, res) => {
     res.send('AttackModifierDeck at /');
 });
 
-module.exports = { router };
+module.exports = { attackModifierDeckRouter: router };
